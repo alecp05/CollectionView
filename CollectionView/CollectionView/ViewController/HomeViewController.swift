@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Int> = UICollectionViewDiffableDataSource(collectionView: self.collectionView, cellProvider: {_,_,_  in return nil })
     
     // /////////////////////////////////////////////////////////////////////////
-    // MARK: - Life Cycle
+    // MARK: - HomeViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +34,6 @@ class HomeViewController: UIViewController {
         
         self.makeConstraints()
     }
-    
-    // /////////////////////////////////////////////////////////////////////////
-    // MARK: - HomeViewController
 
     func makeConstraints() {
         
@@ -51,11 +48,12 @@ class HomeViewController: UIViewController {
     func configureLayout() -> UICollectionViewCompositionalLayout {
         
         // .fractionalWidth(1.0): full with of its parent
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         
         // add it to a group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.2))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         // define section
@@ -84,6 +82,5 @@ class HomeViewController: UIViewController {
         
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
-
 }
 

@@ -17,5 +17,4 @@ public extension UICollectionViewCell {
     static var reusidentifier: String {
         return String(describing: self)
     }
-    
 }

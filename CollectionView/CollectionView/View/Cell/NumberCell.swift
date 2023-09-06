@@ -18,7 +18,12 @@ class NumberCell: UICollectionViewCell {
     // /////////////////////////////////////////////////////////////////////////
     // MARK: - Properties
     
-    var textLabel: UILabel = UILabel()
+    var textLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = .white
+        return label
+    }()
 
     // /////////////////////////////////////////////////////////////////////////
     // MARK: - Life Cycle
@@ -27,6 +32,9 @@ class NumberCell: UICollectionViewCell {
         super.init(frame: frame)
 
         self.addSubview(self.textLabel)
+        
+        self.backgroundColor = .systemPurple
+        
         self.makeConstraints()
     }
 
