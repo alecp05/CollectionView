@@ -18,7 +18,7 @@ class NumberCell: UICollectionViewCell {
     // /////////////////////////////////////////////////////////////////////////
     // MARK: - Properties
     
-    private var textLabel: UILabel = UILabel()
+    var textLabel: UILabel = UILabel()
 
     // /////////////////////////////////////////////////////////////////////////
     // MARK: - Life Cycle
@@ -26,6 +26,7 @@ class NumberCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        self.addSubview(self.textLabel)
         self.makeConstraints()
     }
 

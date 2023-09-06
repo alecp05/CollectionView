@@ -1,21 +1,17 @@
 //
-//  UICollectionViewCell.swift
+//  Section.swift
 //  CollectionView
 //
 //  Created by Alec on 06.09.23.
 //
 
 import Foundation
-import UIKit
 
 // /////////////////////////////////////////////////////////////////////////
-// MARK: - UICollectionViewCell.Extension -
+// MARK: - Section -
 // /////////////////////////////////////////////////////////////////////////
 
-public extension UICollectionViewCell {
-    
-    static var reusidentifier: String {
-        return String(describing: self)
-    }
-    
+// single section that hold all items in the collection view
+enum Section {
+    case main
 }

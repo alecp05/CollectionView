@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     // MARK: - Properties
     
     private var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Int> = UICollectionViewDiffableDataSource(collectionView: self.collectionView, cellProvider: {_,_,_  in return nil })
     
     // /////////////////////////////////////////////////////////////////////////
     // MARK: - Life Cycle
@@ -26,9 +27,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         self.collectionView.collectionViewLayout = self.configureLayout()
-        self.collectionView.backgroundColor = .green
-        
-        self.view.backgroundColor = .brown
+        self.collectionView.register(NumberCell.self, forCellWithReuseIdentifier: NumberCell.reusidentifier)
+        self.configureDataSource()
         
         self.view.addSubview(self.collectionView)
         
@@ -61,6 +61,28 @@ class HomeViewController: UIViewController {
         // define section
         let section = NSCollectionLayoutSection(group: group)
         return UICollectionViewCompositionalLayout(section: section)
+    }
+    
+    func configureDataSource() {
+        
+        // define the datasource and setup cell
+        self.dataSource = UICollectionViewDiffableDataSource(collectionView: self.collectionView, cellProvider: { (collectionView, indexPath, number) -> UICollectionViewCell? in
+            
+            guard let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: NumberCell.reusidentifier, for: indexPath) as? NumberCell else {
+                fatalError("Cannot create new cell")
+            }
+            
+            cell.textLabel.text = number.description
+            
+            return cell
+        })
+        
+        // define snapshot
+        var initialSnapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        initialSnapshot.appendSections([.main])
+        initialSnapshot.appendItems(Array(1...100))
+        
+        dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
 
 }
